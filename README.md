@@ -1,16 +1,5 @@
 <div align = center>
 
----
-
-
-&nbsp; ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
-&nbsp; ![Dart](https://img.shields.io/badge/Dart-00599C?style=for-the-badge&logo=dart&logoColor=white) 
-&nbsp; ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-C51A4A?style=for-the-badge&logo=raspberry-pi&logoColor=white)
-&nbsp; ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
-
-
----
-
 [Présentation](#présentation) | [L'objectif](#l'objectif) | [Hardware](#hardware) | [Software](#software)
 
 </div>
@@ -71,9 +60,29 @@ Nous utiliserons Firebase pour gérer les différents comptes et utilisateurs, l
 Master
 
 ## Techniciens
+<div align = center>
+
 <a href = "https://github.com/nathanverdier">
 <img src ="https://www.proservices-informatique.fr/wp-content/uploads/2023/11/abonnement-assistance-maintenance-informatique.png" height="50px">
 </a>
+
+<strong>VERDIER Nathan</strong>
+
+
+
+---
+
+
+&nbsp; ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
+&nbsp; ![Dart](https://img.shields.io/badge/Dart-00599C?style=for-the-badge&logo=dart&logoColor=white) 
+&nbsp; ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-C51A4A?style=for-the-badge&logo=raspberry-pi&logoColor=white)
+&nbsp; ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
+
+
+---
+
+
+</div>
 
 
 
