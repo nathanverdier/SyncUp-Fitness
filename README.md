@@ -1,8 +1,12 @@
+---
 <div align = center>
 
 [Présentation](#présentation) | [L'objectif](#l'objectif) | [Hardware](#hardware) | [Software](#software)
 
 </div>
+
+---
+
 
 ## Présentation
 
