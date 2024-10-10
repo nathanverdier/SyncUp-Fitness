@@ -11,7 +11,7 @@
 
 ---
 
-[Présentation](#présentation) | [L'objectif](#l'objectif) | [Besoin](#besoin) | [Software](#software)
+[Présentation](#présentation) | [L'objectif](#l'objectif) | [Hardware](#hardware) | [Software](#software)
 
 </div>
 
@@ -31,7 +31,7 @@ Ensuite, toutes ces informations seront accessibles à l'utilisateur via une app
 
 Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces données et proposera des axes d'amélioration à l'utilisateur.
 
-## Besoin
+## Hardware
 
 ### 1. **Capteur de fréquence cardiaque et respiration**
    - **MAX30102** : Module d'oxymètre et de capteur de fréquence cardiaque. [lien MAX30102](https://eu.robotshop.com/fr/products/module-oxymetre-capteur-frequence-cardiaque-max30102?gad_source=1)
