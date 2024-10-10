@@ -1,4 +1,23 @@
-# SyncMotion
+<div align = center>
+
+---
+
+
+&nbsp; ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
+&nbsp; ![Dart](https://img.shields.io/badge/Dart-00599C?style=for-the-badge&logo=dart&logoColor=white) 
+&nbsp; ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-C51A4A?style=for-the-badge&logo=raspberry-pi&logoColor=white)
+&nbsp; ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
+
+
+---
+
+[Présentation](#présentation) | [L'objectif](#l'objectif) | [Besoin](#besoin) | [Software](#software)
+
+</div>
+
+## Présentation
+
+**Nom du projet** : SyncMotion
 
 ## Problématique
 
@@ -11,6 +30,8 @@ Ce projet a pour but de recueillir diverses informations corporelles telles que 
 Ensuite, toutes ces informations seront accessibles à l'utilisateur via une application, lui permettant de faire le point sur ses mouvements lors de sa dernière série, ses gestes, son rythme cardiaque, sa dépense calorique, etc.
 
 Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces données et proposera des axes d'amélioration à l'utilisateur.
+
+## Besoin
 
 ### 1. **Capteur de fréquence cardiaque (ECG ou PPG)**
    - **PPG (Photopléthysmographie)** : Utilisé dans les montres, mais moins précis.
@@ -29,13 +50,30 @@ Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces donnée
    - Certains dispositifs comme les ceintures cardio-fréquencemètres peuvent aussi intégrer la mesure de la respiration, soit par des capteurs de pression, soit par des technologies basées sur la photopléthysmographie.
 
 ### Solution carte mère :
-   - **Raspberry Pi 3/4** : Je pense que c'est la meilleure solution pour ce projet avec une large gamme de capteurs, un bon support logiciel, le Bluetooth intégré comme le wifi.
+   - **Raspberry Pi 3/4** : Je pense que c'est la meilleure solution pour ce projet avec une large gamme de capteurs, un bon support logiciel, le Bluetooth intégré comme le wifi. 
 
-## Batterie
+
+### Batterie
 J'ai du mal à estimer la consommation nécessaire pour tout ce projet. Je pense qu'une batterie au lithium sera nécessaire afin d'avoir une solution portable pouvant durer quelques séances de sport sans avoir à la recharger.
 
+## Software
+
 ## Application
-L'application sera développée en Flutter (Dart) afin que tout ceci soit accessible sur toutes les plateformes mobiles (Android et iOS) et permette une utilisation simple du Bluetooth.
+L'application sera développée en Flutter (Dart) afin que tout ceci soit accessible sur toutes les plateformes mobiles (Android et iOS) et permette une utilisation simple du Bluetooth. 
+
 
 ## Base de données
-Nous utiliserons Firebase pour gérer les différents comptes et utilisateurs, les droits, etc.
+Nous utiliserons Firebase pour gérer les différents comptes et utilisateurs, les droits, etc. 
+
+## Branche de rendu 
+Master
+
+## Techniciens
+<a href = "https://github.com/nathanverdier">
+<img src ="https://www.proservices-informatique.fr/wp-content/uploads/2023/11/abonnement-assistance-maintenance-informatique.png" height="50px">
+</a>
+
+
+
+<div align = center>
+</div>
