@@ -36,6 +36,8 @@ Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces donnée
 ### 1. **Capteur de fréquence cardiaque et respiration**
    - **MAX30102** : Module d'oxymètre et de capteur de fréquence cardiaque. [lien MAX30102](https://eu.robotshop.com/fr/products/module-oxymetre-capteur-frequence-cardiaque-max30102?gad_source=1)
 
+   - **ECG (Électrocardiographie)** : Plus précis, mais peut être moins confortable ou plus contraignant. [lien ECG](https://www.sparkfun.com/products/12969)
+
 ### 2. **Capteur de température corporelle**
    - **Thermistors** ou **capteurs infrarouges** : Ces capteurs mesurent la température cutanée, apparemment. [lien TMP36](https://www.sparkfun.com/products/10988)
    
