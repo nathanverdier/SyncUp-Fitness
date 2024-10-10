@@ -31,6 +31,10 @@ Ensuite, toutes ces informations seront accessibles à l'utilisateur via une app
 
 Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces données et proposera des axes d'amélioration à l'utilisateur.
 
+[**SyncMotion**](SyncMotion) : **Code de l'application**
+
+[**Documentation**](Documentation) : **Regroupe l'entièreté  de la documentation**
+
 ## Hardware
 
 ### 1. **Capteur de fréquence cardiaque et respiration**
