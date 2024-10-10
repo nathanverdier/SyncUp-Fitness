@@ -33,9 +33,8 @@ Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces donnée
 
 ## Besoin
 
-### 1. **Capteur de fréquence cardiaque (ECG ou PPG)**
-   - **PPG (Photopléthysmographie)** : Utilisé dans les montres, mais moins précis.
-   - **ECG (Électrocardiographie)** : Plus précis, mais peut être moins confortable ou plus contraignant. [lien ECG](https://www.sparkfun.com/products/12969)
+### 1. **Capteur de fréquence cardiaque et respiration**
+   - **MAX30102** : Module d'oxymètre et de capteur de fréquence cardiaque. [lien MAX30102](https://eu.robotshop.com/fr/products/module-oxymetre-capteur-frequence-cardiaque-max30102?gad_source=1)
 
 ### 2. **Capteur de température corporelle**
    - **Thermistors** ou **capteurs infrarouges** : Ces capteurs mesurent la température cutanée, apparemment. [lien TMP36](https://www.sparkfun.com/products/10988)
@@ -45,9 +44,6 @@ Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces donnée
 
 ### 4. **Capteurs d'oxygène dans le sang (SpO2)**
    - Mesurent la saturation en oxygène dans le sang. (pas trouvé de site)
-
-### 5. **Capteurs de respiration (Taux de respiration)**
-   - Certains dispositifs comme les ceintures cardio-fréquencemètres peuvent aussi intégrer la mesure de la respiration, soit par des capteurs de pression, soit par des technologies basées sur la photopléthysmographie.
 
 ### Solution carte mère :
    - **Raspberry Pi 3/4** : Je pense que c'est la meilleure solution pour ce projet avec une large gamme de capteurs, un bon support logiciel, le Bluetooth intégré comme le wifi. 
