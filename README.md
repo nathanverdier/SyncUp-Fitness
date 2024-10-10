@@ -12,11 +12,11 @@
 
 **Nom du projet** : SyncMotion
 
-## Problématique
+### Problématique
 
 Tout le monde n'a pas les moyens de se permettre un coach personnel dans une salle de sport ou une salle de crossfit. Ce projet naît de cette constatation. Nous souhaitons éviter que les adhérents d'une salle se blessent en effectuant de mauvais mouvements et leur donner accès à des informations détaillées sur la façon dont leur corps réagit aux exercices, ainsi que sur les moyens de s'améliorer.
 
-## L'objectif
+### L'objectif
 
 Ce projet a pour but de recueillir diverses informations corporelles telles que le rythme cardiaque, l'oxygène dans le sang, la température, etc.
 
@@ -24,9 +24,15 @@ Ensuite, toutes ces informations seront accessibles à l'utilisateur via une app
 
 Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces données et proposera des axes d'amélioration à l'utilisateur.
 
+## Répartition du Gitlab
+
+La racine du github est composé de deux dossier :
+
 [**SyncMotion**](SyncMotion) : **Code de l'application**
 
 [**Documentation**](Documentation) : **Regroupe l'entièreté  de la documentation**
+
+⚠️ Code de l'application en cours!
 
 ## Hardware
 
