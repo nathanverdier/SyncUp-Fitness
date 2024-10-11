@@ -44,8 +44,8 @@ La racine du github est composé de deux dossier :
 ### 2. **Capteur de température corporelle**
    - **Thermistors** ou **capteurs infrarouges** : Ces capteurs mesurent la température cutanée, apparemment. [lien TMP36](https://www.sparkfun.com/products/10988)
    
-### 3. **Accéléromètre et gyroscope**
-   - Utilisés pour suivre les mouvements, la vitesse et la position du corps pendant l'activité. Les capteurs triaxiaux peuvent détecter les accélérations dans toutes les directions et analyser les mouvements complexes, très utiles pour suivre la course, la marche ou le cyclisme. [lien MPU-6050](https://www.sparkfun.com/products/10937) 
+### 3. **Accéléromètre et gyroscope (2 nécessaire)**
+   - Utilisés pour suivre les mouvements, la vitesse et la position du corps pendant l'activité. Les capteurs triaxiaux peuvent détecter les accélérations dans toutes les directions et analyser les mouvements complexes, très utiles pour suivre la course, la marche ou le cyclisme. [lien MPU-6050](https://www.sparkfun.com/products/10937) (2 sont nécessaire, un poignet (peut-être modifier) et un cheville (peut-être modifier))
 
 ### 4. **Capteurs d'oxygène dans le sang (SpO2)**
    - Mesurent la saturation en oxygène dans le sang. (pas trouvé de site)
