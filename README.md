@@ -12,6 +12,8 @@
 
 **Nom du projet** : SyncUp Fitness
 
+(Évoque l'idée de se synchroniser pour atteindre des objectifs de fitness.)
+
 ### Problématique
 
 Tout le monde n'a pas les moyens de se permettre un coach personnel dans une salle de sport ou une salle de crossfit. Ce projet naît de cette constatation. Nous souhaitons éviter que les adhérents d'une salle se blessent en effectuant de mauvais mouvements et leur donner accès à des informations détaillées sur la façon dont leur corps réagit aux exercices, ainsi que sur les moyens de s'améliorer.
