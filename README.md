@@ -12,7 +12,7 @@
 
 **Nom du projet** : SyncUp Fitness
 
-(Évoque l'idée de se synchroniser pour atteindre des objectifs de fitness.)
+(Évoque l'idée de se synchroniser pour atteindre des objectifs en salle)
 
 ### Problématique
 
