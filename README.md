@@ -30,7 +30,7 @@ Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces donnée
 
 La racine du github est composé de deux dossier :
 
-[**SyncMotion**](SyncMotion) : **Code de l'application**
+[**SyncUp Fitness**](SyncMotion) : **Code de l'application**
 
 [**Documentation**](Documentation) : **Regroupe l'entièreté  de la documentation**
 
