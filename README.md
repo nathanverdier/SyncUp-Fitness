@@ -10,7 +10,7 @@
 
 ## Présentation
 
-**Nom du projet** : SyncMotion
+**Nom du projet** : SyncUp Fitness
 
 ### Problématique
 
