@@ -1,11 +1,18 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screens/stopwatch_page.dart';
 import 'screens/home_page.dart';
 import 'screens/favorites_page.dart';
+import 'screens/google_fit_page.dart';
 
-void main() {
+Future<void> main() async {
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    // Gérer l'erreur de chargement des variables d'environnement
+  }
   runApp(MyApp());
 }
 
@@ -62,13 +69,16 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = HomePage(); // Utilisez HomePage
+        page = HomePage();
         break;
       case 1:
-        page = FavoritesPage(); // Utilisez FavoritesPage
+        page = FavoritesPage();
         break;
       case 2:
-        page = StopwatchPage(); // Ajoutez cette ligne pour le chronomètre
+        page = StopwatchPage();
+        break;
+      case 3:
+        page = GoogleFitPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -92,8 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.timer),
-                    label: Text(
-                        'Stopwatch'), // Ajoutez cette ligne pour le chronomètre
+                    label: Text('Stopwatch'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.fitness_center),
+                    label: Text('Google Fit'),
                   ),
                 ],
                 selectedIndex: selectedIndex,
