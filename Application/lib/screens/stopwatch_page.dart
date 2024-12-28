@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class StopwatchPage extends StatefulWidget {
+  const StopwatchPage({super.key});
+
   @override
   _StopwatchPageState createState() => _StopwatchPageState();
 }
