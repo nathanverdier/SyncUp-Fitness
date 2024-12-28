@@ -91,6 +91,14 @@ class _MyHomePageState extends State<MyHomePage> {
             SafeArea(
               child: NavigationRail(
                 extended: constraints.maxWidth >= 600,
+                leading: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    width: 50, // Taille du logo
+                    height: 50,
+                  ),
+                ),
                 destinations: [
                   NavigationRailDestination(
                     icon: Icon(Icons.home),
