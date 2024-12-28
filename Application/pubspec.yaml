@@ -70,6 +70,10 @@ flutter:
   assets:
     - .env
     - assets/images/logo.png
+    - assets/images/bench.gif
+    - assets/images/deadlift.gif
+    - assets/images/pullup.gif
+    - assets/images/squat.gif
 
 flutter_icons:
   android: true
