@@ -6,6 +6,7 @@ import 'screens/stopwatch_page.dart';
 import 'screens/home_page.dart';
 import 'screens/favorites_page.dart';
 import 'screens/google_fit_page.dart';
+import 'screens/exercise_page.dart';
 
 Future<void> main() async {
   try {
@@ -80,6 +81,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 3:
         page = GoogleFitPage();
         break;
+      case 4:
+        page = ExercisePage(); // Ajouter la nouvelle page
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -115,6 +119,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   NavigationRailDestination(
                     icon: Icon(Icons.fitness_center),
                     label: Text('Google Fit'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.directions_run),
+                    label: Text('Exercises'), // Ajouter la nouvelle destination
                   ),
                 ],
                 selectedIndex: selectedIndex,
