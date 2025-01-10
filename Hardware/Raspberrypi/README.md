@@ -9,6 +9,7 @@ sudo apt install python3-libcamera
 
 ## Camera imx477 config
 ```shell
+vim /boot/firmware/config.txt
 # Find the line: camera_auto_detect=1, update it to:
 camera_auto_detect=0
 # Find the line: [all], add the following item under it:
