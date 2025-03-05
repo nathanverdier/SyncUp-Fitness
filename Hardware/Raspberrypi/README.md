@@ -3,8 +3,6 @@
 ## Dowload libcamera & kms++
 ```shell
 sudo apt install -y libcamera0 libcamera-apps libcamera-dev
-sudo apt install -y python3-kms++
-sudo apt install python3-libcamera
 ```
 
 ## Camera imx477 config
