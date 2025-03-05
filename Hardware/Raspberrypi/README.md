@@ -17,8 +17,9 @@ dtoverlay=imx477
 # Save and reboot.
 ```
 
-##  Configure ienvironnement python
+##  Configure environnement python
 ```shell
+sudo apt-get install libcap-dev
 pip install -r requirements.txt
 export LD_LIBRARY_PATH=/usr/lib/arm-linux-gnueabihf:$LD_LIBRARY_PATH
 export PYTHONPATH=/usr/lib/python3/dist-packages:$PYTHONPATH
