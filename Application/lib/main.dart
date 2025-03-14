@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
         page = StopwatchPage();
         break;
       case 3:
-        page = GoogleFitPage();
+        page = BluetoothHeartRatePage();
         break;
       case 4:
         page = ExercisePage(); // Ajouter la nouvelle page
