@@ -35,7 +35,9 @@ dependencies:
   google_sign_in: ^5.0.7
   fl_chart: ^0.70.0
   http: ^0.13.3
+  flutter_blue_plus: ^1.16.0
   flutter_dotenv: ^5.0.2
+  permission_handler: ^10.2.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -74,6 +76,8 @@ flutter:
     - assets/images/deadlift.gif
     - assets/images/pullup.gif
     - assets/images/squat.gif
+    - assets/images/biceps_curl.gif
+    - assets/images/treadmill.gif
 
 flutter_icons:
   android: true
@@ -85,8 +89,6 @@ flutter_native_splash:
   image: assets/images/logo.png # Chemin de l'image du logo
   android: true
   ios: false
-
-
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
