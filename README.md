@@ -30,36 +30,20 @@ Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces donnée
 
 La racine du github est composé de deux dossier :
 
-[**Syncup_fitness_app**](SyncMotion) : **Code de l'application**
+[**Syncup_fitness_app**](Application) : **Code de l'application**
 
 [**Documentation**](Documentation) : **Regroupe l'entièreté  de la documentation**
+
+[**Hardware code**](Hardware) : **Le code de la partie hardware**
 
 ⚠️ Code de l'application en cours!
 
 ## Hardware
-
-### 1. **Capteur de fréquence cardiaque et respiration**
-   - **MAX30102** : Module d'oxymètre et de capteur de fréquence cardiaque. [lien MAX30102](https://eu.robotshop.com/fr/products/module-oxymetre-capteur-frequence-cardiaque-max30102?gad_source=1)
-
-   - **ECG (Électrocardiographie)** : Plus précis, mais peut être moins confortable ou plus contraignant. [lien ECG](https://www.sparkfun.com/products/12969)
-
-### 2. **Capteur de température corporelle**
-   - **Thermistors** ou **capteurs infrarouges** : Ces capteurs mesurent la température cutanée, apparemment. [lien TMP36](https://www.sparkfun.com/products/10988)
-   
-### 3. **Accéléromètre et gyroscope (2 nécessaire)**
-   - Utilisés pour suivre les mouvements, la vitesse et la position du corps pendant l'activité. Les capteurs triaxiaux peuvent détecter les accélérations dans toutes les directions et analyser les mouvements complexes, très utiles pour suivre la course, la marche ou le cyclisme. [lien MPU-6050](https://www.sparkfun.com/products/10937) (2 sont nécessaire, un poignet (peut-être modifier) et un cheville (peut-être modifier))
-
-### 4. **Capteurs d'oxygène dans le sang (SpO2)**
-   - Mesurent la saturation en oxygène dans le sang. (pas trouvé de site)
-
 ### Solution carte mère :
-   - **Raspberry Pi 3/4** : Je pense que c'est la meilleure solution pour ce projet avec une large gamme de capteurs, un bon support logiciel, le Bluetooth intégré comme le wifi. 
+   - **Raspberry Pi 4** : Je pense que c'est la meilleure solution pour ce projet avec une large gamme de capteurs, un bon support logiciel, le Bluetooth intégré comme le wifi. 
 
-
-### Batterie
-J'ai du mal à estimer la consommation nécessaire pour tout ce projet. Je pense qu'une batterie au lithium sera nécessaire afin d'avoir une solution portable pouvant durer quelques séances de sport sans avoir à la recharger.
-
-## Software
+### Camera
+   - **Camera imx477** : Permet l'utilisation du grand angle, pratique lors de scéance de sport
 
 ## Application
 L'application sera développée en Flutter (Dart) afin que tout ceci soit accessible sur toutes les plateformes mobiles (Android et iOS) et permette une utilisation simple du Bluetooth. 
