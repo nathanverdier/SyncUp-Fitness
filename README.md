@@ -1,7 +1,7 @@
 ---
 <div align = center>
 
-[Présentation](#présentation) | [L'objectif](#l'objectif) | [Hardware](#hardware)
+[Présentation](#présentation) | [L'objectif](#objectif) | [Hardware](#hardware)
 
 </div>
 
