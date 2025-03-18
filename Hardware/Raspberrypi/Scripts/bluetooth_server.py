@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import bluetooth
 import subprocess
+import time
 
 # Dictionnaire des commandes disponibles et des scripts correspondants
 COMMANDS = {
@@ -32,23 +33,32 @@ def run_bluetooth_server():
         print("  ➜ STOP (pour arrêter la connexion)")
 
         while True:
-            data = client_sock.recv(1024)
-            if not data:
-                break
+            try:
+                data = client_sock.recv(1024)
+                if not data:
+                    break  # Si aucune donnée reçue, quitter la boucle
 
-            command = data.decode('utf-8').strip()
-            print(f"🎤 Commande reçue : {command}")
+                command = data.decode('utf-8').strip()
+                print(f"🎤 Commande reçue : {command}")
 
-            if command.upper() == "STOP":
-                print("🛑 Arrêt de la connexion Bluetooth...")
-                break
+                if command.upper() == "STOP":
+                    print("🛑 Arrêt de la connexion Bluetooth...")
+                    break
 
-            if command in COMMANDS:
-                script_name = COMMANDS[command]
-                print(f"🚀 Exécution de {script_name}...")
-                subprocess.Popen(["python3", script_name])
-            else:
-                print(f"⚠️ Commande inconnue : {command}")
+                if command in COMMANDS:
+                    script_name = COMMANDS[command]
+                    print(f"🚀 Exécution de {script_name}...")
+                    subprocess.Popen(["python3", script_name])
+                else:
+                    print(f"⚠️ Commande inconnue : {command}")
+            except bluetooth.BluetoothError as e:
+                print(f"❌ Erreur de communication Bluetooth : {e}")
+                break  # Quitter si une erreur Bluetooth se produit
+            except Exception as e:
+                print(f"❌ Erreur générale : {e}")
+                break  # Quitter en cas d'erreur générale
+
+            time.sleep(0.1)  # Ajouter un petit délai pour éviter la surcharge CPU
 
     except Exception as e:
         print(f"❌ Erreur : {e}")
