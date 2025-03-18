@@ -2,48 +2,62 @@
 import bluetooth
 import subprocess
 
+# Dictionnaire des commandes disponibles et des scripts correspondants
+COMMANDS = {
+    "Squat": "Squat.py",
+    "Pull-ups": "PullUp.py",
+    "Deadlift": "Deadlift.py",
+    "Bench press": "benchPress.py",
+    "Biceps Curls": "biceps.py",
+    "Treadmill": "treadmill.py"
+}
+
 def run_bluetooth_server():
-    # Création de la socket Bluetooth en mode RFCOMM
+    """Lance un serveur Bluetooth RFCOMM pour recevoir des commandes et exécuter des scripts."""
     server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
     port = 1  # Canal RFCOMM standard
-    server_sock.bind(("", port))
-    server_sock.listen(1)
-    print("En attente d'une connexion sur le canal RFCOMM", port)
-    
-    client_sock, client_info = server_sock.accept()
-    print("Connexion acceptée de", client_info)
     
     try:
+        server_sock.bind(("", port))
+        server_sock.listen(1)
+        print(f"📡 En attente d'une connexion Bluetooth sur le canal RFCOMM {port}...")
+
+        client_sock, client_info = server_sock.accept()
+        print(f"✅ Connexion acceptée de {client_info}")
+
+        print("\n📜 **Commandes disponibles**:")
+        for cmd in COMMANDS.keys():
+            print(f"  ➜ {cmd}")
+
+        print("  ➜ STOP (pour arrêter la connexion)")
+
         while True:
             data = client_sock.recv(1024)
             if not data:
                 break
+
             command = data.decode('utf-8').strip()
-            print("Commande reçue :", command)
+            print(f"🎤 Commande reçue : {command}")
+
             if command.upper() == "STOP":
-                print("Arrêt de la connexion...")
+                print("🛑 Arrêt de la connexion Bluetooth...")
                 break
-            # Lancer le script correspondant en fonction de la commande
-            if command == "Squat":
-                subprocess.Popen(["python3", "Squat.py"])
-            elif command == "Pull-ups":
-                subprocess.Popen(["python3", "PullUp.py"])
-            elif command == "Deadlift":
-                subprocess.Popen(["python3", "Deadlift.py"])
-            elif command == "Bench press":
-                subprocess.Popen(["python3", "benchPress.py"])
-            elif command == "Biceps Curls":
-                subprocess.Popen(["python3", "biceps.py"])
-            elif command == "Treadmill":
-                subprocess.Popen(["python3", "biceps.py"])
+
+            if command in COMMANDS:
+                script_name = COMMANDS[command]
+                print(f"🚀 Exécution de {script_name}...")
+                subprocess.Popen(["python3", script_name])
             else:
-                print("Commande non reconnue :", command)
+                print(f"⚠️ Commande inconnue : {command}")
+
     except Exception as e:
-        print("Erreur :", e)
+        print(f"❌ Erreur : {e}")
+
     finally:
+        print("🔌 Fermeture de la connexion Bluetooth...")
         client_sock.close()
         server_sock.close()
-        print("Connexion fermée.")
+        print("✅ Serveur arrêté.")
 
 if __name__ == "__main__":
     run_bluetooth_server()
