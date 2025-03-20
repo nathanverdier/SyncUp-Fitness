@@ -3,6 +3,8 @@ from picamera2 import Picamera2  # Pour contrôler la caméra Raspberry Pi
 import cv2  # OpenCV pour le traitement d'images
 import mediapipe as mp  # MediaPipe pour la détection de pose
 import numpy as np  # NumPy pour les calculs mathématiques
+import json
+import sys
 
 # Initialisation des outils de dessin et du modèle Pose de MediaPipe
 mp_drawing = mp.solutions.drawing_utils  # Utilisé pour dessiner les landmarks et les connexions
@@ -163,6 +165,10 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
     except KeyboardInterrupt:
         print("Arrêt par l'utilisateur.")  # Message lors d'une interruption avec Ctrl+C
     finally:
+        result = {"left_arm": left_counter, "right_arm": right_counter}
+        # Pour les autres exercices, tu pourrais simplement afficher left_counter (ou total)
+        print(json.dumps(result))
+        sys.stdout.flush()
         cv2.destroyAllWindows()  # Fermer toutes les fenêtres d'affichage
         picam2.stop()  # Arrêter la caméra
 

@@ -3,6 +3,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
+# Initialisation de MediaPipe et de Picamera2
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
@@ -12,6 +13,7 @@ picam2.configure(config)
 picam2.start()
 
 def calculate_angle(a, b, c):
+    """Calcule l'angle entre trois points (ex: hanche, genou, cheville)"""
     a = np.array(a)
     b = np.array(b)
     c = np.array(c)
@@ -23,9 +25,10 @@ def calculate_angle(a, b, c):
         
     return angle
 
-squat_counter = 0
-squat_stage = None
+deadlift_counter = 0
+deadlift_stage = None
 
+# Détection des poses avec MediaPipe
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     try:
         while True:
@@ -37,38 +40,43 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                 landmarks = results.pose_landmarks.landmark
                 h, w, _ = frame_bgr.shape
                 
+                # Points clés pour le deadlift (jambe gauche uniquement ici)
                 hip = [landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].x * w,
                        landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].y * h]
                 knee = [landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].x * w,
                         landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].y * h]
                 ankle = [landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value].x * w,
                          landmarks[mp_pose.PoseLandmark.LEFT_ANKLE.value].y * h]
+                shoulder = [landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x * w,
+                            landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y * h]
                 
-                knee_angle = calculate_angle(hip, knee, ankle)
+                # Calcul des angles
+                knee_angle = calculate_angle(hip, knee, ankle)  # Angle du genou
+                hip_angle = calculate_angle(shoulder, hip, knee)  # Angle de la hanche
                 
-                if knee_angle > 160:
-                    squat_stage = "up"
-                if knee_angle < 90 and squat_stage == "up":
-                    squat_stage = "down"
-                    squat_counter += 1
-                    print(f"Squats: {squat_counter}")
+                # Détection du mouvement du deadlift
+                if knee_angle > 160 and hip_angle > 160:
+                    deadlift_stage = "up"
+                if knee_angle < 110 and hip_angle < 90 and deadlift_stage == "up":
+                    deadlift_stage = "down"
+                    deadlift_counter += 1
+                    print(f"Deadlifts: {deadlift_counter}")
                 
-                cv2.putText(
-                    frame_bgr,
-                    f"Angle: {int(knee_angle)}",
-                    tuple(np.multiply(knee, [1, 1]).astype(int)),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.5,
-                    (255, 255, 255),
-                    2,
-                    cv2.LINE_AA
-                )
+                # Affichage des angles
+                cv2.putText(frame_bgr, f"Knee: {int(knee_angle)}", 
+                            tuple(np.multiply(knee, [1, 1]).astype(int)),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
+                cv2.putText(frame_bgr, f"Hip: {int(hip_angle)}", 
+                            tuple(np.multiply(hip, [1, 1]).astype(int)),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
                 
-                cv2.rectangle(frame_bgr, (0, 0), (250, 60), (245, 117, 16), -1)
-                cv2.putText(frame_bgr, f"SQUATS: {squat_counter} | {squat_stage}",
+                # Affichage du compteur et de l'état du mouvement
+                cv2.rectangle(frame_bgr, (0, 0), (300, 60), (245, 117, 16), -1)
+                cv2.putText(frame_bgr, f"Deadlifts: {deadlift_counter} | {deadlift_stage}",
                             (10, 40),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
                 
+                # Dessiner les landmarks du corps
                 mp_drawing.draw_landmarks(
                     frame_bgr,
                     results.pose_landmarks,
@@ -77,7 +85,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                     mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2)
                 )
             
-            cv2.imshow("Squat Tracker", frame_bgr)
+            cv2.imshow("Deadlift Tracker", frame_bgr)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
     except KeyboardInterrupt:
