@@ -25,12 +25,19 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'Namer App',
+        title: 'SyncUp Fitness',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
+          // Assure-toi d'utiliser ici la police (font) que tu souhaites pour toute l'application
         ),
-        home: MyHomePage(),
+        // Ajout de la propriété routes pour définir les routes nommées
+        routes: {
+          '/': (context) => const MyHomePage(),
+          '/exercise_page': (context) => const ExercisePage(),
+          // Tu peux ajouter d'autres routes ici si nécessaire
+        },
+        initialRoute: '/',
       ),
     );
   }
@@ -70,19 +77,16 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = HomePage();
+        page = const HomePage();
         break;
       case 1:
-        page = FavoritesPage();
+        page = const StopwatchPage();
         break;
       case 2:
-        page = StopwatchPage();
+        page = const BluetoothHeartRatePage();
         break;
       case 3:
-        page = BluetoothHeartRatePage();
-        break;
-      case 4:
-        page = ExercisePage(); // Ajouter la nouvelle page
+        page = const ExercisePage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -99,18 +103,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset(
                     'assets/images/logo.png',
-                    width: 50, // Taille du logo
+                    width: 50,
                     height: 50,
                   ),
                 ),
-                destinations: [
+                destinations: const [
                   NavigationRailDestination(
                     icon: Icon(Icons.home),
                     label: Text('Home'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.favorite),
-                    label: Text('Favorites'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.timer),
@@ -122,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.directions_run),
-                    label: Text('Exercises'), // Ajouter la nouvelle destination
+                    label: Text('Exercises'),
                   ),
                 ],
                 selectedIndex: selectedIndex,
