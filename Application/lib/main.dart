@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screens/stopwatch_page.dart';
 import 'screens/home_page.dart';
-import 'screens/favorites_page.dart';
+//import 'screens/favorites_page.dart';
 import 'screens/google_fit_page.dart';
 import 'screens/exercise_page.dart';
 
