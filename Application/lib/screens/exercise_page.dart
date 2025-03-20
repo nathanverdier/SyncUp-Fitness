@@ -1,54 +1,126 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+// Adresse IP du Raspberry Pi
+const String raspberryIp = "10.192.10.135";
+
+// Fonction pour envoyer une requête HTTP (Démarrer/Arrêter)
+Future<void> _sendRequestToRaspberry(String command) async {
+  final Uri url = Uri.parse(
+      "http://$raspberryIp:5000/${command == "STOP" ? "stop" : "run"}");
+
+  try {
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: command == "STOP" ? null : jsonEncode({"script": command}),
+    );
+
+    if (response.statusCode == 200) {
+      print(
+          "✅ Commande ${command == "STOP" ? "d'arrêt" : "d'exécution"} envoyée !");
+    } else {
+      print("❌ Erreur : ${response.body}");
+    }
+  } catch (e) {
+    print("⚠ Impossible de contacter la Raspberry : $e");
+  }
+}
+
+// Fonction pour récupérer les répétitions depuis Flask
+Future<Map<String, dynamic>> _getRepsFromRaspberry() async {
+  final Uri url = Uri.parse("http://$raspberryIp:5000/get_reps");
+
+  try {
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      print("❌ Erreur lors de la récupération des répétitions");
+      return {};
+    }
+  } catch (e) {
+    print("⚠ Impossible de récupérer les répétitions : $e");
+    return {};
+  }
+}
 
 class ExercisePage extends StatelessWidget {
-  const ExercisePage({super.key});
+  const ExercisePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Détecter l'orientation de l'écran
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-
+    final exercises = [
+      {'title': 'Squat', 'script': 'Squat', 'image': 'assets/images/squat.gif'},
+      {
+        'title': 'Pull-ups',
+        'script': 'PullUp',
+        'image': 'assets/images/pullup.gif'
+      },
+      {
+        'title': 'Deadlift',
+        'script': 'Deadlift',
+        'image': 'assets/images/deadlift.gif'
+      },
+      {
+        'title': 'Bench press',
+        'script': 'benchPress',
+        'image': 'assets/images/bench.gif'
+      },
+      {
+        'title': 'Biceps Curls',
+        'script': 'biceps',
+        'image': 'assets/images/biceps_curl.gif'
+      },
+      {
+        'title': 'Treadmill',
+        'script': 'treadmill',
+        'image': 'assets/images/treadmill.gif'
+      },
+    ];
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Exercises'),
-      ),
+      appBar: AppBar(title: Text('Exercises')),
       body: Container(
-        color: Theme.of(context).colorScheme.primaryContainer, // Fond bleu
         padding: const EdgeInsets.all(16.0),
+        color: Colors.blue[100],
         child: Center(
           child: GridView.builder(
-            shrinkWrap: true, // Important pour centrer GridView
+            shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: isLandscape
-                  ? 2
-                  : 1, // 2 boutons par ligne en paysage, 1 en portrait
-              mainAxisSpacing: 20, // Espacement vertical entre les boutons
-              crossAxisSpacing: 20, // Espacement horizontal entre les boutons
-              childAspectRatio: 3, // Ratio largeur/hauteur pour les boutons
+              crossAxisCount: isLandscape ? 2 : 1,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+              childAspectRatio: 3,
             ),
-            itemCount: 6, // Nombre total de boutons
+            itemCount: exercises.length,
             itemBuilder: (context, index) {
-              // Liste des exercices et images associées
-              final exercises = [
-                {'title': 'Squat', 'image': 'assets/images/squat.gif'},
-                {'title': 'Pull-ups', 'image': 'assets/images/pullup.gif'},
-                {'title': 'Deadlift', 'image': 'assets/images/deadlift.gif'},
-                {'title': 'Bench press', 'image': 'assets/images/bench.gif'},
-                {
-                  'title': 'Biceps Curls',
-                  'image': 'assets/images/biceps_curl.gif'
-                },
-                {'title': 'Treadmill', 'image': 'assets/images/treadmill.gif'},
-              ];
-
-              return _buildExerciseButton(
-                context,
-                exercises[index]['title']!,
-                exercises[index]['image']!,
+              return ElevatedButton(
+                onPressed: () => _showExerciseDialog(
+                    context,
+                    exercises[index]['title']!,
+                    exercises[index]['script']!,
+                    exercises[index]['image']!),
+                child: Row(
+                  children: [
+                    // Affiche le GIF sur la gauche
+                    Image.asset(
+                      exercises[index]['image']!,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(width: 10),
+                    // Affiche le titre de l'exercice
+                    Text(
+                      exercises[index]['title']!,
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
               );
             },
           ),
@@ -57,34 +129,13 @@ class ExercisePage extends StatelessWidget {
     );
   }
 
-  Widget _buildExerciseButton(
-      BuildContext context, String title, String imagePath) {
-    return ElevatedButton(
-      onPressed: () {
-        // Afficher la popup au clic et envoyer la requête Bluetooth
-        _showExerciseDialog(context, title);
-      },
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Image.asset(imagePath, width: 50, height: 50),
-          SizedBox(width: 20), // Espacement entre l'image et le texte
-          Expanded(child: Text(title, style: TextStyle(fontSize: 18))),
-        ],
-      ),
-    );
-  }
-
-  void _showExerciseDialog(BuildContext context, String title) {
+  void _showExerciseDialog(
+      BuildContext context, String title, String script, String image) {
     showDialog(
       context: context,
-      barrierDismissible:
-          false, // Désactiver la fermeture en cliquant en dehors
+      barrierDismissible: false,
       builder: (BuildContext context) {
-        return _ExerciseDialog(title: title);
+        return _ExerciseDialog(title: title, script: script, image: image);
       },
     );
   }
@@ -92,8 +143,11 @@ class ExercisePage extends StatelessWidget {
 
 class _ExerciseDialog extends StatefulWidget {
   final String title;
+  final String script;
+  final String image;
 
-  const _ExerciseDialog({required this.title});
+  const _ExerciseDialog(
+      {required this.title, required this.script, required this.image});
 
   @override
   State<_ExerciseDialog> createState() => _ExerciseDialogState();
@@ -102,85 +156,61 @@ class _ExerciseDialog extends StatefulWidget {
 class _ExerciseDialogState extends State<_ExerciseDialog> {
   int secondsElapsed = 0;
   Timer? timer;
-  BluetoothDevice? _device;
-  BluetoothCharacteristic? _characteristic;
-
-  @override
-  void initState() {
-    super.initState();
-    _startTimer();
-    _sendBluetoothRequest(widget.title);
-  }
-
-  // Démarrage du timer
-  void _startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
-      setState(() {
-        secondsElapsed++;
-      });
-    });
-  }
-
-  // Arrêter le timer
-  void _stopTimer() {
-    if (timer != null) {
-      timer!.cancel();
-      timer = null;
-    }
-  }
-
-  // Envoyer une requête Bluetooth à la Raspberry Pi
-  void _sendBluetoothRequest(String command) async {
-    var statusScan = await Permission.bluetoothScan.request();
-    var statusConnect = await Permission.bluetoothConnect.request();
-    var statusLocation = await Permission.locationWhenInUse.request();
-
-    if (statusScan.isGranted &&
-        statusConnect.isGranted &&
-        statusLocation.isGranted) {
-      // Start scanning
-      FlutterBluePlus.startScan(timeout: Duration(seconds: 4));
-
-      // Listen to scan results
-      FlutterBluePlus.scanResults.listen((results) async {
-        for (ScanResult r in results) {
-          if (r.device.name == 'YourRaspberryPiDeviceName') {
-            await FlutterBluePlus.stopScan();
-            _device = r.device;
-            await _device!.connect();
-            List<BluetoothService> services = await _device!.discoverServices();
-            for (var service in services) {
-              for (var characteristic in service.characteristics) {
-                if (characteristic.uuid
-                    .toString()
-                    .contains("00001101-0000-1000-8000-00805F9B34FB")) {
-                  _characteristic = characteristic;
-                  await _characteristic!.write(command.codeUnits);
-                  return;
-                }
-              }
-            }
-          }
-        }
-      });
-    }
-  }
-
-  // Envoyer une requête pour arrêter le programme sur la Raspberry Pi
-  void _sendStopRequest() async {
-    if (_characteristic != null) {
-      await _characteristic!.write("STOP".codeUnits);
-    }
-    if (_device != null) {
-      await _device!.disconnect();
-    }
-  }
+  bool isRunning = false;
 
   @override
   void dispose() {
     _stopTimer();
-    _sendStopRequest();
     super.dispose();
+  }
+
+  void _startTimer() {
+    setState(() => isRunning = true);
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      setState(() => secondsElapsed++);
+    });
+  }
+
+  void _stopTimer() {
+    timer?.cancel();
+    setState(() {
+      isRunning = false;
+      secondsElapsed = 0;
+    });
+  }
+
+  Future<void> _startScriptExecution() async {
+    await _sendRequestToRaspberry(widget.script);
+    _startTimer();
+  }
+
+  Future<void> _stopScriptExecution() async {
+    await _sendRequestToRaspberry("STOP");
+    _stopTimer();
+    Map<String, dynamic> repsData = await _getRepsFromRaspberry();
+    _showRepsDialog(repsData);
+  }
+
+  void _showRepsDialog(Map<String, dynamic> repsData) {
+    String message = "Répétitions : ${repsData[widget.script] ?? 0}";
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Résultats de l'exercice"),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text("Fermer"),
+            ),
+          ],
+        );
+      },
+    ).then((_) {
+      Navigator.of(context).pop();
+    });
   }
 
   @override
@@ -190,24 +220,17 @@ class _ExerciseDialogState extends State<_ExerciseDialog> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CircularProgressIndicator(), // Spinner de chargement
+          Image.asset(widget.image, height: 100, width: 100, fit: BoxFit.cover),
           SizedBox(height: 20),
-          Text(
-            'Recovery of data',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 20),
-          Text(
-            'Timer: $secondsElapsed seconds',
-            style: TextStyle(fontSize: 20),
-          ),
+          Text('Exécution : ${widget.title}',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          SizedBox(height: 10),
+          Text('Timer : $secondsElapsed secondes',
+              style: TextStyle(fontSize: 20)),
           SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () {
-              _stopTimer(); // Arrêter le timer
-              Navigator.of(context).pop(); // Fermer la popup
-            },
-            child: Text('Stop'),
+            onPressed: isRunning ? _stopScriptExecution : _startScriptExecution,
+            child: Text(isRunning ? 'Arrêter' : 'Démarrer'),
           ),
         ],
       ),
