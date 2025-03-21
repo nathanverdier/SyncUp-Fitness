@@ -22,3 +22,7 @@ pip install -r requirements.txt
 export LD_LIBRARY_PATH=/usr/lib/arm-linux-gnueabihf:$LD_LIBRARY_PATH
 export PYTHONPATH=/usr/lib/python3/dist-packages:$PYTHONPATH
 ```
+## Lancer server flask
+```shell
+python3 serverFlask.py
+```
