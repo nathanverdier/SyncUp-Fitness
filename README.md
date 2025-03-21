@@ -1,68 +1,71 @@
 ---
-<div align = center>
+<div align="center">
 
-[Présentation](#présentation) | [L'objectif](#l'objectif) | [Hardware](#hardware)
+[Presentation](#presentation) | [Objective](#objective) | [Hardware](#hardware)
 
 </div>
 
 ---
 
+## Presentation  
 
-## Présentation
+**Project Name**: SyncUp Fitness  
 
-**Nom du projet** : SyncUp Fitness
+(Reflects the idea of synchronizing to achieve fitness goals)  
 
-(Évoque l'idée de se synchroniser pour atteindre des objectifs en salle)
+### Problem Statement  
 
-### Problématique
+Not everyone can afford a personal coach in a gym or a CrossFit facility. This project was born from that realization. We aim to prevent gym members from injuring themselves due to improper movements and provide them with detailed insights on how their bodies respond to exercises, as well as ways to improve.  
 
-Tout le monde n'a pas les moyens de se permettre un coach personnel dans une salle de sport ou une salle de crossfit. Ce projet naît de cette constatation. Nous souhaitons éviter que les adhérents d'une salle se blessent en effectuant de mauvais mouvements et leur donner accès à des informations détaillées sur la façon dont leur corps réagit aux exercices, ainsi que sur les moyens de s'améliorer.
+### Objective  
 
-### L'objectif
+This project aims to collect various body metrics such as heart rate, blood oxygen levels, temperature, etc.  
 
-Ce projet a pour but de recueillir diverses informations corporelles telles que le rythme cardiaque, l'oxygène dans le sang, la température, etc.
+All this data will then be accessible to the user via an application, allowing them to analyze their movements from their last set, posture, heart rate, calorie expenditure, and more.  
 
-Ensuite, toutes ces informations seront accessibles à l'utilisateur via une application, lui permettant de faire le point sur ses mouvements lors de sa dernière série, ses gestes, son rythme cardiaque, sa dépense calorique, etc.
+Later, an AI using a **modifiable VFTD model** will process these data and suggest areas for improvement to the user.  
 
-Par la suite, une IA utilisant un modèle VFTD (modifiable) traitera ces données et proposera des axes d'amélioration à l'utilisateur.
+## GitLab Structure  
 
-## Répartition du Gitlab
+The root of the GitHub repository consists of three main folders:  
 
-La racine du github est composé de deux dossier :
+[**Syncup_fitness_app**](Application) : **Application code**  
 
-[**Syncup_fitness_app**](Application) : **Code de l'application**
+[**Documentation**](Documentation) : **Contains all project documentation**  
 
-[**Documentation**](Documentation) : **Regroupe l'entièreté  de la documentation**
+[**Hardware code**](Hardware) : **Hardware-related code**  
 
-[**Hardware code**](Hardware) : **Le code de la partie hardware**
+⚠️ Application code is still in progress!  
 
-⚠️ Code de l'application en cours!
+## Hardware  
 
-## Hardware
-### Solution carte mère :
-   - **Raspberry Pi 4** : Je pense que c'est la meilleure solution pour ce projet avec une large gamme de capteurs, un bon support logiciel, le Bluetooth intégré comme le wifi. 
+### Motherboard Solution:  
+   - **Raspberry Pi 4**: This is the best solution for this project, offering compatibility with a wide range of sensors, good software support, built-in Bluetooth, and Wi-Fi.  
 
-### Camera
-   - **Camera imx477** : Permet l'utilisation du grand angle, pratique lors de scéance de sport
+### Camera  
+   - **IMX477 Camera**: Supports wide-angle functionality, useful during workout sessions.  
 
-## Application
-L'application sera développée en Flutter (Dart) afin que tout ceci soit accessible sur toutes les plateformes mobiles (Android et iOS) et permette une utilisation simple du Bluetooth. 
+## Application  
 
+The application will be developed using **Flutter (Dart)** to ensure accessibility on all mobile platforms (Android and iOS) and enable seamless Bluetooth integration.  
 
-## Base de données
-Nous utiliserons Firebase pour gérer les différents comptes et utilisateurs, les droits, etc. 
+## Database  
 
-## Branche de rendu 
-Master
+We will use **Firebase** to manage user accounts, permissions, and data storage.  
 
-## Techniciens
-<div align = center>
+## Main Branch  
 
-<a href = "https://github.com/nathanverdier">
-<img src ="https://www.proservices-informatique.fr/wp-content/uploads/2023/11/abonnement-assistance-maintenance-informatique.png" height="50px">
-</a>
+**Master**  
 
-<strong>VERDIER Nathan</strong>
+## Developers  
+
+<div align="center">  
+
+<a href="https://github.com/nathanverdier">  
+<img src="https://www.proservices-informatique.fr/wp-content/uploads/2023/11/abonnement-assistance-maintenance-informatique.png" height="50px">  
+</a>  
+
+<strong>VERDIER Nathan</strong>  
 
 
 
@@ -83,4 +86,3 @@ Master
 
 
 <div align = center>
-</div>
