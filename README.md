@@ -1,6 +1,8 @@
 ---
 <div align="center">
 
+ <img src="Application/assets/images/logo.png" />
+
 [Presentation](#presentation) | [Objective](#objective) | [Hardware](#hardware)
 
 </div>
